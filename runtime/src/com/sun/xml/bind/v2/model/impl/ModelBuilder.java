@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -250,7 +250,7 @@ public class ModelBuilder<T,C,F,M> {
                         String pkg = nav.getPackageName(ci.getClazz());
                         if(!registries.containsKey(pkg)) {
                             // insert the package's object factory
-                            C c = nav.findClass(pkg + ".ObjectFactory",ci.getClazz());
+                            C c = nav.loadObjectFactory(clazz, pkg);
                             if(c!=null)
                                 addRegistry(c,(Locatable)p);
                         }

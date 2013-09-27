@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -49,9 +49,6 @@ import javax.xml.namespace.QName;
 
 import com.sun.xml.bind.v2.model.annotation.AnnotationReader;
 import com.sun.xml.bind.v2.model.core.TypeInfoSet;
-import com.sun.xml.bind.v2.model.core.NonElement;
-import com.sun.xml.bind.v2.model.nav.Navigator;
-import com.sun.xml.bind.v2.model.nav.ReflectionNavigator;
 import com.sun.xml.bind.v2.model.runtime.RuntimeNonElement;
 import com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfoSet;
 
@@ -62,16 +59,12 @@ import com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfoSet;
  */
 final class RuntimeTypeInfoSetImpl extends TypeInfoSetImpl<Type,Class,Field,Method> implements RuntimeTypeInfoSet {
     public RuntimeTypeInfoSetImpl(AnnotationReader<Type,Class,Field,Method> reader) {
-        super(Navigator.REFLECTION,reader,RuntimeBuiltinLeafInfoImpl.LEAVES);
+        super(Utils.REFLECTION_NAVIGATOR,reader,RuntimeBuiltinLeafInfoImpl.LEAVES);
     }
 
     @Override
     protected RuntimeNonElement createAnyType() {
         return RuntimeAnyTypeImpl.theInstance;
-    }
-
-    public ReflectionNavigator getNavigator() {
-        return (ReflectionNavigator)super.getNavigator();
     }
 
     public RuntimeNonElement getTypeInfo( Type type ) {
@@ -99,7 +92,7 @@ final class RuntimeTypeInfoSetImpl extends TypeInfoSetImpl<Type,Class,Field,Meth
     }
 
     public Map<Class,RuntimeArrayInfoImpl> arrays() {
-        return (Map<Class,RuntimeArrayInfoImpl>)super.arrays(); 
+        return (Map<Class,RuntimeArrayInfoImpl>)super.arrays();
     }
 
     public RuntimeElementInfoImpl getElementInfo(Class scope,QName name) {

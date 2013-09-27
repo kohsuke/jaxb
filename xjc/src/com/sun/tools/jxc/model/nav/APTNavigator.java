@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -86,8 +86,7 @@ import com.sun.xml.bind.v2.runtime.Location;
  *
  * @author Kohsuke Kawaguchi (kk@kohsuke.org)
  */
-public class APTNavigator implements Navigator<TypeMirror,TypeDeclaration,FieldDeclaration,MethodDeclaration> {
-
+public final class APTNavigator implements Navigator<TypeMirror,TypeDeclaration,FieldDeclaration,MethodDeclaration> {
     private final AnnotationProcessorEnvironment env;
 
     private final PrimitiveType primitiveByte;
@@ -292,8 +291,9 @@ public class APTNavigator implements Navigator<TypeMirror,TypeDeclaration,FieldD
         return clazz.getPackage().getQualifiedName();
     }
 
-    public TypeDeclaration findClass(String className, TypeDeclaration referencePoint) {
-        return env.getTypeDeclaration(className);
+    @Override
+    public TypeDeclaration loadObjectFactory(TypeDeclaration referencePoint, String packageName) {
+        return env.getTypeDeclaration(packageName + ".ObjectFactory");
     }
 
     public boolean isBridgeMethod(MethodDeclaration method) {

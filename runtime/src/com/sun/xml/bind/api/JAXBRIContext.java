@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 1997-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 1997-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -60,7 +60,6 @@ import com.sun.istack.Nullable;
 import com.sun.xml.bind.api.impl.NameConverter;
 import com.sun.xml.bind.v2.ContextFactory;
 import com.sun.xml.bind.v2.model.annotation.RuntimeAnnotationReader;
-import com.sun.xml.bind.v2.model.nav.Navigator;
 import com.sun.xml.bind.v2.model.runtime.RuntimeTypeInfoSet;
 
 /**
@@ -419,7 +418,7 @@ public abstract class JAXBRIContext extends JAXBContext {
      * @since 2.0 FCS
      */
     public static @Nullable Type getBaseType(@NotNull Type type, @NotNull Class baseType) {
-        return Navigator.REFLECTION.getBaseClass(type,baseType);
+        return Utils.REFLECTION_NAVIGATOR.getBaseClass(type, baseType);
     }
 
 
