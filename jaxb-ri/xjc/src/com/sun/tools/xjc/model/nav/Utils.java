@@ -51,6 +51,9 @@ import java.util.logging.Logger;
 
 /**
  * Utils class.
+ *
+ * WARNING: If you are doing any changes don't forget to change other Utils classes in different packages.
+ *
  * Has *package private* access to avoid inappropriate usage.
  */
 /* package */ final class Utils {
