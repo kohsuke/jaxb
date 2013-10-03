@@ -54,7 +54,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import com.sun.xml.bind.v2.runtime.Location;
-import sun.reflect.misc.ReflectUtil;
 
 /**
  * {@link Navigator} implementation for {@code java.lang.reflect}.
