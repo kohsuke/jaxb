@@ -73,7 +73,7 @@ import com.sun.xml.bind.v2.runtime.Location;
 //  ---------------------------------------
 
     public Class getSuperClass(Class clazz) {
-        checkPackageAccess(clazz);
+        checkPackageAccess(clazz.getName());
         if (clazz == Object.class) {
             return null;
         }
