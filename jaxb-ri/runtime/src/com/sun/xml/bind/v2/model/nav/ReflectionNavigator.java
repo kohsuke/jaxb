@@ -281,12 +281,12 @@ import com.sun.xml.bind.v2.runtime.Location;
     }
 
     public Collection<? extends Field> getDeclaredFields(Class clazz) {
-        checkPackageAccess(clazz);
+        checkPackageAccess(clazz.getName());
         return Arrays.asList(clazz.getDeclaredFields());
     }
 
     public Field getDeclaredField(Class clazz, String fieldName) {
-        checkPackageAccess(clazz);
+        checkPackageAccess(clazz.getName());
         try {
             return clazz.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
@@ -295,7 +295,7 @@ import com.sun.xml.bind.v2.runtime.Location;
     }
 
     public Collection<? extends Method> getDeclaredMethods(Class clazz) {
-        checkPackageAccess(clazz);
+        checkPackageAccess(clazz.getName());
         return Arrays.asList(clazz.getDeclaredMethods());
     }
 
@@ -540,7 +540,7 @@ import com.sun.xml.bind.v2.runtime.Location;
     }
 
     public Field[] getEnumConstants(Class clazz) {
-        checkPackageAccess(clazz);
+        checkPackageAccess(clazz.getName());
         try {
             Object[] values = clazz.getEnumConstants();
             Field[] fields = new Field[values.length];
@@ -570,13 +570,14 @@ import com.sun.xml.bind.v2.runtime.Location;
 
     @Override
     public Class loadObjectFactory(Class referencePoint, String pkg) {
-        checkPackageAccess(referencePoint);
+        String clName = pkg + ".ObjectFactory";
+        checkPackageAccess(clName);
         ClassLoader cl = referencePoint.getClassLoader();
         if (cl == null)
             cl = ClassLoader.getSystemClassLoader();
 
         try {
-            return cl.loadClass(pkg + ".ObjectFactory");
+            return cl.loadClass(clName);
         } catch (ClassNotFoundException e) {
             return null;
         }
@@ -650,11 +651,10 @@ import com.sun.xml.bind.v2.runtime.Location;
     /**
      * Checking if current thread can access class.
      *
-     * @param clazz to be checked
+     * @param clName name of the class to be checked
      * @throws SecurityException is thrown if thread doesn't have privileges
      */
-     static void  checkPackageAccess(Class clazz) {
-        String clName = clazz.getName();
+     static void  checkPackageAccess(String clName) {
         SecurityManager sm = System.getSecurityManager();
         if (sm == null)
             return;
