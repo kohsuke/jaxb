@@ -68,17 +68,18 @@
     <pathelement path="${jaxb.libs.util}/txwc2.jar"/>
     <pathelement path="${jaxb.libs.util}/args4j.jar"/>
     <pathelement path="${jaxb.libs.compiler}/rngom.jar"/>
-    <pathelement path="${codemodel.classes}"/>
+    <!--<pathelement path="${codemodel.classes}"/>-->
   </path>
 
     
+<!--
     <target name="generate-array-listers">
         <macrodef name="generateCopiesForPrimitives">
           <attribute name="srcdir"/>
           <attribute name="destdir"/>
           <attribute name="prefix" />
           <sequential>
-            <!-- macro to replace one file -->
+            &lt;!&ndash; macro to replace one file &ndash;&gt;
             <macrodef name="generate">
               <attribute name="primitive"/>
               <attribute name="box"/>
@@ -102,43 +103,43 @@
           </sequential>
         </macrodef>
         
-        <!-- generate ArrayLister for other primitive types -->
+        &lt;!&ndash; generate ArrayLister for other primitive types &ndash;&gt;
         <generateCopiesForPrimitives
           srcdir=       "${runtime.root}/src/com/sun/xml/bind/v2/runtime/reflect"
           destdir="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect"
           prefix="PrimitiveArrayLister" />
 
-        <!-- generate Accessor for fields -->
+        &lt;!&ndash; generate Accessor for fields &ndash;&gt;
         <generateCopiesForPrimitives
           srcdir=       "${runtime.root}/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           destdir="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           prefix="FieldAccessor_" />
 
-        <!-- generate Accessor for methods -->
+        &lt;!&ndash; generate Accessor for methods &ndash;&gt;
         <generateCopiesForPrimitives
           srcdir=       "${runtime.root}/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           destdir="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           prefix="MethodAccessor_" />
 
-        <!-- generate TransducedAccessor for fields -->
+        &lt;!&ndash; generate TransducedAccessor for fields &ndash;&gt;
         <generateCopiesForPrimitives
           srcdir=       "${runtime.root}/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           destdir="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           prefix="TransducedAccessor_field_" />
-        <!-- the char version won't be correct. Don't use it. Char is rare anyway. -->
+        &lt;!&ndash; the char version won't be correct. Don't use it. Char is rare anyway. &ndash;&gt;
         <delete file="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt/TransducedAccessor_field_Character.java"/>
-        <!-- integer version is also hand-coded. -->
+        &lt;!&ndash; integer version is also hand-coded. &ndash;&gt;
         <delete file="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt/TransducedAccessor_field_Integer.java"/>
         <delete file="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt/TransducedAccessor_field_Boolean.java"/>
 
-        <!-- generate TransducedAccessor for methods -->
+        &lt;!&ndash; generate TransducedAccessor for methods &ndash;&gt;
         <generateCopiesForPrimitives
           srcdir=       "${runtime.root}/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           destdir="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt"
           prefix="TransducedAccessor_method_" />
-        <!-- the char version won't be correct. Don't use it. Char is rare anyway. -->
+        &lt;!&ndash; the char version won't be correct. Don't use it. Char is rare anyway. &ndash;&gt;
         <delete file="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt/TransducedAccessor_method_Character.java"/>
-        <!-- integer version is also hand-coded. -->
+        &lt;!&ndash; integer version is also hand-coded. &ndash;&gt;
         <delete file="${runtime.root}/build/src/com/sun/xml/bind/v2/runtime/reflect/opt/TransducedAccessor_method_Integer.java"/>
     </target>
     
@@ -203,16 +204,22 @@
 
     <target name="codegen" depends="generate-array-listers,generate-annotation-proxies,txwc"
             description="run all the code generators in the runtime" />
+-->
 
     <!-- compile Java source files -->
+<!--
     <target name="compile" depends="codegen"
+                description="compile all runtime src into jaxb-ri/runtime/build/classes">
+-->
+    <target name="compile"
                 description="compile all runtime src into jaxb-ri/runtime/build/classes">
         <mkdir dir="${runtime.classes}" />
 
         <!-- always delete this prop file so that the latest build id can be set -->
         <delete file="${runtime.classes}/com/sun/xml/bind/Messages.properties"/>
 
-        <javac srcdir="${runtime.src}:${runtime.root}/build/src" destdir="${runtime.classes}"
+        <!--<javac srcdir="${runtime.src}:${runtime.root}/build/src" destdir="${runtime.classes}"-->
+        <javac srcdir="${runtime.src}" destdir="${runtime.classes}"
             debug="${compile.debug}" optimize="${compile.optimize}"
         	source="1.5" target="1.5"
             deprecation="${compile.deprecation}" >
