@@ -172,7 +172,7 @@
             <fileset dir="${runtime.src}"/>
             <fileset dir="${runtime-fi.src}"/>
             <fileset dir="${runtime-staxex.src}"/>
-            <fileset dir="${runtime.root}/build/src" />
+            <!--<fileset dir="${runtime.root}/build/src" />-->
             <zipfileset src="${jaxb.libs}/src/txw2-sources.jar" />
             <zipfileset src="${jaxb.libs}/src/istack-commons-runtime-sources.jar"/>
           </zip>
