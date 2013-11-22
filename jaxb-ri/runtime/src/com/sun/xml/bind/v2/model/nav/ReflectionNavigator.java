@@ -590,7 +590,7 @@ import com.sun.xml.bind.v2.runtime.Location;
         // class Base<T> {
         //   T getX() { ... }
         // }
-        // to be :)overrided. Handling this correctly needs a careful implementation
+        // to be overrided. Handling this correctly needs a careful implementation
 
         String name = method.getName();
         Class[] params = method.getParameterTypes();
